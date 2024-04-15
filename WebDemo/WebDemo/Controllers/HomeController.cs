@@ -31,7 +31,7 @@ namespace WebDemo.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Message = e.Message.ToString() + "|" + e.StackTrace?.Substring(0, 300);
+                ViewBag.Message = e.Message.ToString() + "|sss" + e.StackTrace?.Substring(0, 300);
             }
 
             return View();
