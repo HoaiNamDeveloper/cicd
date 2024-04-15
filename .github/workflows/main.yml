@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  dev:
     runs-on: windows-2019  # Matches WINDOWS_LTSC in GKE
     permissions:
       id-token: write
