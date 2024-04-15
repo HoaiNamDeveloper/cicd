@@ -1,0 +1,42 @@
+# sqlserver deployment and service: sqlserver-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-sqlserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-sqlserver
+  template:
+    metadata:
+      labels:
+        app: ms-sqlserver
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+      - name: ms-sqlserver
+        image: octopusdeploy/mssql-server-windows-express
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          value: "Solazu123!@#"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-sqlserver
+spec:
+  selector:
+    app: ms-sqlserver
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+  type: LoadBalancer
+
+

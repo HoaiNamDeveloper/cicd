@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  website:
+    environment:
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1
+    image: ${DOCKER_REGISTRY-}website
+    build:
+      context: ./WebSite
+    ports:
+      - "80:80"
+      - "443:443"
+    hostname: local.authoritycrm.com #${APP_UUID}
+    container_name: App_Server #${APP_UUID}
+    # volumes:
+    #   - "C:/WebSite:C:/inetpub/wwwroot"
+    # networks:
+    #   docker_net1:
+    volumes:
+      - C:/Users/LT0001/Documents/Projects/AuthorityCRM/src/WebSite:c:/inetpub/wwwroot:rw"      
+    # networks:
+    #   - docker_authority-net
+
+  authority_db:
+    image: authority_db
+    build:
+      context: ./NaturesProducts.DB
+      args:
+        DB_NAME: "ujdemo001"
+    ports:
+      - "1433:1433"
+    #env_file: db_dev.env
+    environment:
+       SA_PASSWORD: "a123456!"
+       ACCEPT_EULA: "Y"
+# networks:
+#   docker_net1:
+#     networks:
+#       - docker_authority-net
+
+# networks:
+#   docker_authority-net:
+#     internal: true
