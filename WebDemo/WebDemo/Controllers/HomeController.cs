@@ -22,7 +22,7 @@ namespace WebDemo.Controllers
         {
             try
             {
-                ViewBag.Message = "Your application descrtccnn,nnon page.sql";
+                ViewBag.Message = "Your application descrtccn,nnon page.sql";
 
             }
             catch (SqlException e)
